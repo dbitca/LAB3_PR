@@ -1,4 +1,4 @@
-package com.example.lab33333;
+package com.example.lab33333.Service;
 import com.example.lab33333.models.Object;
 import org.springframework.stereotype.Component;
 
@@ -10,39 +10,45 @@ public class ServiceClass {
     private List<Object> objectList = new CopyOnWriteArrayList<>();
     private int idCount = 1;
 
-    public Object addObject(Object object){
+    public Object addObject(Object object) {
         object.setId(idCount);
         objectList.add(object);
         idCount++;
         return object;
     }
 
-    public List<Object> getObjectList (){
+    public List<Object> getObjectList() {
         return objectList;
     }
 
-    public int getObjectListSize(){
-        return objectList.size();
-    }
-//to modify get object according to ID
-    public Object getObject(int objectId){
-        return objectList.stream().filter(c -> c.getId() == objectId).findFirst().get();
+    //to modify get object according to ID
+    public Object getObject(int objectId) {
+        int id = 0;
+        for (Object o : objectList) {
+            if (o.getId() == objectId) {
+                id = objectList.indexOf(o);
+                break;
+            }
+        }
+        return objectList.get(id);
     }
 
-    public Object updateObject(int Id, Object object){
-        objectList.stream().forEach(c -> {
-            if(c.getId() == Id){
-                c.setName(object.getName());
+    public Object updateObject(int Id, Object object) {
+        int id = 0;
+        for (Object o : objectList) {
+            if (o.getId() == Id) {
+                o.setName(object.getName());
+                id = objectList.indexOf(o);
             }
-        });
-        return objectList.stream().filter(c-> c.getId() == Id).findFirst().get();
+        }
+        return objectList.get(id);
     }
 
-    public void deleteObject(int Id){
-        objectList.stream().forEach(c->{
-            if(c.getId() == Id){
-                objectList.remove(c);
+    public void deleteObject(int Id) {
+        for (Object o : objectList) {
+            if (o.getId() == Id) {
+                objectList.remove(o);
             }
-        });
+        }
     }
 }

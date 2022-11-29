@@ -1,18 +1,9 @@
-package com.example.lab33333;
-
+package com.example.lab33333.Controler;
 import com.example.lab33333.models.Object;
-import org.apache.commons.logging.Log;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.Console;
-import java.security.Provider;
 import java.util.List;
-
-import com.example.lab33333.models.*;
-import com.example.lab33333.ServiceClass;
+import com.example.lab33333.Service.ServiceClass;
 
 @RestController
 @RequestMapping("/object")
